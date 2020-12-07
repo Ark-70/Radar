@@ -1,0 +1,51 @@
+%% Reset
+clc;
+clear all;
+close all;
+
+%% Constantes
+PLOT_PsH_ON = 1;
+
+nb_rea = 1000;
+nb_obs = 10;
+varb = 2;
+m = 4;
+
+Pfa_fix = 0.01;
+%% Parametres
+
+%% Debut
+
+b = randn(nb_obs, nb_rea)*sqrt(varb);
+s = randn(nb_obs, nb_rea)*sqrt(varb) + m;
+
+PsH0 = sum(b, 1); % vu qu'on considère la somme de nos observations
+PsH1 = sum(s, 1); % du coup on peut mieux séparer
+
+if(PLOT_PsH_ON)
+    figure;
+    histogram(PsH0);
+    hold on;
+    histogram(PsH1);
+end
+
+hasard = randi([0 1], 1, nb_rea); % hypothèse sortante de la décision : 1 = H1 vrai
+yadusignal = hasard; % H1 = un signal d'interet est present a la realisation ri
+
+signal_sans_bruit = repmat(yadusignal*m, 10, 1);
+
+obs = b;
+obs = obs + signal_sans_bruit;
+
+%% seuil
+
+seuil = sqrt(2*nb_obs*varb)*erfcinv(2*Pfa_fix);
+
+%% decision
+
+decision = seuil >
+
+
+
+
+  
